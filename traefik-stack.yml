@@ -28,7 +28,6 @@ services:
       # CLI or environment configuration is preferred, but traefik only lets you set the TLS certificate paths via file configurtion
       - '--providers.file.filename=/traefik-config.yml'
     networks:
-      - 'ingress'
       - 'traefik'
     ports:
       - target: 443
@@ -50,9 +49,7 @@ services:
         target: '/run/secrets/dark.florist-origin-certificate'
 
 networks:
-  # ingress network where the public connects
-  ingress:
-    external: true
+  # note: ingress network is automatically connected to if you publish any ports
   # internal private network with services that traefik should route to
   traefik:
     external: true
