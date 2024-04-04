@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  traefik:
+    deploy:
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.my-traefik-router.tls=true'
+        - 'traefik.http.routers.my-traefik-router.rule=Host(`traefik.dark.florist`)'
+        - 'traefik.http.routers.my-traefik-router.service=my-traefik-service'
+        - 'traefik.http.routers.my-traefik-router.middlewares=my-traefik-middleware'
+        - 'traefik.http.services.my-traefik-service.loadbalancer.server.port=8080'
+        - 'traefik.http.services.my-traefik-service.loadbalancer.server.scheme=http'
+        - 'traefik.http.middlewares.my-traefik-middleware.basicauth.usersfile=/run/secrets/traefik-users'
+      restart_policy:
+        condition: 'any'
+      placement:
+        constraints:
+          - 'node.role == manager'
+    image: 'traefik:v2.11@sha256:0a5157f742d2900389da6ce60ea80cc476801dc951917a993cd848d982f58265'
+    command:
+      - '--providers.docker=true'
+      - '--providers.docker.swarmMode=true'
+      - '--providers.docker.exposedByDefault=false'
+      - '--providers.docker.network=traefik'
+      - '--entryPoints.websecure.address=:443'
+      - '--api.dashboard=true'
+      # CLI or environment configuration is preferred, but traefik only lets you set the TLS certificate paths via file configurtion
+      - '--providers.file.filename=/traefik-config.yml'
+    networks:
+      - 'ingress'
+      - 'traefik'
+    ports:
+      - target: 443
+        published: 443
+        protocol: 'tcp'
+    volumes:
+      - type: 'bind'
+        source: '/var/run/docker.sock'
+        target: '/var/run/docker.sock'
+    configs:
+      - source: 'traefik-config.yml'
+        target: '/traefik-config.yml'
+    secrets:
+      - source: 'traefik-users'
+        target: '/run/secrets/traefik-users'
+      - source: 'dark.florist-private-key'
+        target: '/run/secrets/dark.florist-private-key'
+      - source: 'dark.florist-origin-certificate'
+        target: '/run/secrets/dark.florist-origin-certificate'
+
+networks:
+  # ingress network where the public connects
+  ingress:
+    external: true
+  # internal private network with services that traefik should route to
+  traefik:
+    external: true
+
+configs:
+  # keeping config in this YML file is preferable, but Traefik stupidly doesn't let you set certificate path via CLI config, so we have to put it in a file config
+  traefik-config.yml:
+    external: true
+
+secrets:
+  # TLS key
+  dark.florist-private-key:
+    external: true
+  # TLS certificate
+  dark.florist-origin-certificate:
+    external: true
+  # users that can login to the traefik UI
+  traefik-users:
+    external: true
