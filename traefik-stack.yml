@@ -5,12 +5,10 @@ services:
     deploy:
       labels:
         - 'traefik.enable=true'
-        - 'traefik.http.routers.my-traefik-router.tls=true'
-        - 'traefik.http.routers.my-traefik-router.rule=Host(`traefik.dark.florist`)'
-        - 'traefik.http.routers.my-traefik-router.service=my-traefik-service'
-        - 'traefik.http.routers.my-traefik-router.middlewares=my-traefik-middleware'
-        - 'traefik.http.services.my-traefik-service.loadbalancer.server.port=8080'
-        - 'traefik.http.services.my-traefik-service.loadbalancer.server.scheme=http'
+        - 'traefik.http.routers.my-traefik-dashboard-router.tls=true'
+        - 'traefik.http.routers.my-traefik-dashboard-router.rule=Host(`traefik.dark.florist`)'
+        - 'traefik.http.routers.my-traefik-dashboard-router.service=api@internal'
+        - 'traefik.http.routers.my-traefik-dashboard-router.middlewares=my-traefik-middleware'
         - 'traefik.http.middlewares.my-traefik-middleware.basicauth.usersfile=/run/secrets/traefik-users'
       restart_policy:
         condition: 'any'
