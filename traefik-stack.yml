@@ -10,6 +10,8 @@ services:
         - 'traefik.http.routers.my-traefik-dashboard-router.service=api@internal'
         - 'traefik.http.routers.my-traefik-dashboard-router.middlewares=my-traefik-middleware'
         - 'traefik.http.middlewares.my-traefik-middleware.basicauth.usersfile=/run/secrets/traefik-users'
+        # # Dummy service for Swarm port detection. The port can be any valid integer value.
+        - 'traefik.http.services.dummy-svc.loadbalancer.server.port=9999'
       restart_policy:
         condition: 'any'
       placement:
