@@ -14,26 +14,39 @@ services:
         constraints: [node.platform.os == linux]
 
   portainer:
-    image: 'portainer/portainer-ce:2.20.0@sha256:6719feba5c8098ee958795190a30e8d5210c00c2917aaa7a5793800054d8c2c0'
-    command: '-H tcp://tasks.agent:9001 --tlsskipverify'
-    ports:
-      - '9443:9443'
-      - '9000:9000'
-      - '8000:8000'
-    volumes:
-      - 'portainer_data:/data'
-    networks:
-      - 'portainer_agent_network'
     deploy:
       mode: 'replicated'
       replicas: 1
       placement:
         constraints: [node.role == manager]
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.my-portainer-router.tls=true'
+        - 'traefik.http.routers.my-portainer-router.rule=Host(`portainer.dark.florist`)'
+        - 'traefik.http.routers.my-portainer-router.service=my-portainer-service'
+        - 'traefik.http.services.my-portainer-service.loadbalancer.server.port=9000'
+    image: 'portainer/portainer-ce:2.20.0@sha256:6719feba5c8098ee958795190a30e8d5210c00c2917aaa7a5793800054d8c2c0'
+    command: '-H tcp://tasks.agent:9001 --tlsskipverify'
+    environment:
+      VIRTUAL_HOST: portainer.dark.florist
+      VIRTUAL_PORT: 9000
+      VIRTUAL_NETWORK: traefik
+    # uncomment these initially, and comment them back out once traefik is up and running, this lets us use Portainer to deploy Traefik, but then use Traefik to access portainer
+    #ports:
+    #  - '9443:9443'
+    #  - '9000:9000'
+    #  - '8000:8000'
+    volumes:
+      - 'portainer_data:/data'
+    networks:
+      - 'portainer_agent_network'
 
 networks:
   portainer_agent_network:
     driver: 'overlay'
     attachable: true
+  traefik:
+    external: true
 
 volumes:
   portainer_data:
