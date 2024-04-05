@@ -38,6 +38,7 @@ services:
     networks:
       - 'portainer_agents'
       - 'traefik'
+      - 'public-facing'
 
 networks:
   portainer_agents:
@@ -45,6 +46,8 @@ networks:
     attachable: true
     internal: true
   traefik:
+    external: true
+  public-facing:
     external: true
 
 volumes:
