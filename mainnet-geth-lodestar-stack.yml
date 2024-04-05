@@ -98,7 +98,7 @@ secrets:
   mainnet-geth-jwt.hex:
     external: true
 
-networks:
+network:
   traefik:
     external: true
 
