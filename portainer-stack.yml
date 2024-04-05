@@ -43,6 +43,7 @@ networks:
   portainer_agents:
     driver: 'overlay'
     attachable: true
+    internal: true
   traefik:
     external: true
 
