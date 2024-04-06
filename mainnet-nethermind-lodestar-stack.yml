@@ -74,7 +74,7 @@ services:
       - '--rest'
       - '--rest.address=0.0.0.0'
       - '--rest.namespace=*'
-      - '--execution.urls=http://geth:8551'
+      - '--execution.urls=http://nethermind:8551'
       - '--network=mainnet'
       - '--port=9000'
       - '--metrics'
