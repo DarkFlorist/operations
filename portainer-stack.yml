@@ -7,7 +7,7 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '/var/lib/docker/volumes:/var/lib/docker/volumes'
     networks:
-      - 'portainer_agents'
+      - 'portainer-agents'
     deploy:
       mode: 'global'
       placement:
@@ -36,12 +36,13 @@ services:
     volumes:
       - 'portainer_data:/data'
     networks:
-      - 'portainer_agents'
+      - 'portainer-agents'
       - 'traefik'
+      # need public facing to pull stack definitions from GitHub
       - 'public-facing'
 
 networks:
-  portainer_agents:
+  portainer-agents:
     driver: 'overlay'
     attachable: true
     internal: true
