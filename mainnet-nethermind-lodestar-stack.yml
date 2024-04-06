@@ -66,7 +66,7 @@ services:
         condition: 'any'
       placement:
         constraints:
-          - 'node.hostname == cherry-lithuania-geth-worker'
+          - 'node.hostname == cherry-lithuania-nethermind'
     image: 'chainsafe/lodestar:v1.17.0@sha256:54b2400f49f1db0efbf76bf74173d1fdea2c081090eb15ae0094a87118704066'
     command:
       - 'beacon'
