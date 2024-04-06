@@ -38,7 +38,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 apt-get update
 
 # install docker v25.0.5-1 via apt package manager
-apt-get install docker-ce=5:25.0.5-1~ubuntu.22.04~jammy docker-ce-cli=5:25.0.5-1~ubuntu.22.04~jammy containerd.io docker-buildx-plugin docker-compose-plugin
+apt-get install --yes docker-ce=5:25.0.5-1~ubuntu.22.04~jammy docker-ce-cli=5:25.0.5-1~ubuntu.22.04~jammy containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Move docker data location to another drive with
 # mount /dev/sdb1 /docker-data-drive
