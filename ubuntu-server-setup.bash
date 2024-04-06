@@ -41,13 +41,18 @@ apt-get update
 apt-get install --yes docker-ce=5:25.0.5-1~ubuntu.22.04~jammy docker-ce-cli=5:25.0.5-1~ubuntu.22.04~jammy containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Move docker data location to another drive with
-# mount /dev/sdb1 /docker-data-drive
-# TODO: add to fstab so it survives restarts
+# mkdir /docker-data-drive
 # chmod a+rx /docker-data-drive
+# fdisk /dev/sdb
+# # create partition table
+# # create partition
+# mkfs.ext4 /dev/sdb1
+# echo "/dev/sdb1 /docker-data-drive ext4 defaults 0 0" | sudo tee -a /etc/fstab
+# mount -a
 # ln -s /docker-data-drive /var/lib/docker
 # cat << EOF > /etc/docker/daemon.json
 # { 
-#   "graph": "/docker-data-drive"
+#   "data-root": "/docker-data-drive"
 # }
 # EOF
 
