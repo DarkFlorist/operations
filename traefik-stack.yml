@@ -34,7 +34,6 @@ services:
       - '--providers.file.filename=/traefik-config.yml'
     networks:
       - 'traefik'
-      - 'public-facing'
     ports:
       - target: 443
         published: 443
@@ -55,8 +54,7 @@ services:
         target: '/run/secrets/dark.florist-origin-certificate'
 
 networks:
-  public-facing:
-    external: true
+  # note: published ports bypass any internal network restrictions
   # internal private network with services that traefik should route to
   traefik:
     external: true
