@@ -34,6 +34,7 @@ services:
       - '--providers.file.filename=/traefik-config.yml'
     networks:
       - 'traefik'
+      - 'public-facing'
     ports:
       - target: 443
         published: 443
@@ -54,7 +55,8 @@ services:
         target: '/run/secrets/dark.florist-origin-certificate'
 
 networks:
-  # note: ingress network is automatically connected to if you publish any ports
+  public-facing:
+    external: true
   # internal private network with services that traefik should route to
   traefik:
     external: true
