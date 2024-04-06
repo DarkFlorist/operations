@@ -45,11 +45,12 @@ services:
     #  - '8000:8000'
     volumes:
       - 'portainer_data:/data'
+      # workaround for https://github.com/portainer/portainer/issues/8806
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
     networks:
       - 'portainer-agents'
       - 'traefik'
-      # need public facing to pull stack definitions from GitHub
+      # needs internet access to pull stack definitions from GitHub
       - 'public-facing'
 
 networks:
