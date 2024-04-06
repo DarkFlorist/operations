@@ -1,0 +1,120 @@
+services:
+  nethermind:
+    deploy:
+      mode: 'global'
+      restart_policy:
+        condition: 'any'
+      placement:
+        constraints:
+          - 'node.hostname == cherry-lithuania-nethermind'
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.my-nethermind-rpc-router.tls=true'
+        - 'traefik.http.routers.my-nethermind-rpc-router.rule=Host(`nethermind.dark.florist`)'
+        - 'traefik.http.routers.my-nethermind-rpc-router.service=my-nethermind-rpc-service'
+        - 'traefik.http.services.my-nethermind-rpc-service.loadbalancer.server.port=8545'
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+    image: 'nethermindeth/nethermind:eth_multicall@sha256:e35845c4799950893d7ac775738ba852b15d09929b9eb7a025d92a9df59aa85f'
+    environment:
+      NETHERMIND_CONFIG: 'mainnet'
+      NETHERMIND_INITCONFIG_BASEDBPATH: '/data/db'
+      NETHERMIND_KEYSTORECONFIG_KEYSTOREDIRECTORY: '/data/keystore'
+      NETHERMIND_HEALTHCHECKS_ENABLED: 'true'
+      NETHERMIND_HEALTHCHECKS_UIENABLED: 'true'
+      NETHERMIND_INITCONFIG_MEMORYHINT: '24000000000'
+      NETHERMIND_JSONRPCCONFIG_ENABLED: 'true'
+      NETHERMIND_JSONRPCCONFIG_HOST: '0.0.0.0'
+      NETHERMIND_JSONRPCCONFIG_PORT: '8545'
+      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: 'Eth,Subscribe,Trace,Proof,TxPool,TxProof,Net,Web3,Multicall,Parity'
+      NETHERMIND_JSONRPCCONFIG_ADDITIONALRPCURLS: 'http://0.0.0.0:8551|http;ws|net;eth;subscribe;engine;web3;client'
+      NETHERMIND_JSONRPCCONFIG_JWTSECRETFILE: '/run/secrets/jwt.hex'
+      NETHERMIND_SYNCCONFIG_FASTBLOCKS: 'true'
+    networks:
+      - 'traefik'
+      - 'internal'
+      - 'public-facing'
+    ports:
+      - target: 30303
+        published: 30303
+        protocol: 'tcp'
+        mode: 'host'
+      - target: 30303
+        published: 30303
+        protocol: 'udp'
+        mode: 'host'
+    configs:
+      - source: 'nethermind-NLog.config'
+        target: '/nethermind/NLog.config'
+    secrets:
+      - source: 'jwt-secret.hex'
+        target: '/run/secrets/jwt.hex'
+    volumes:
+      - type: 'volume'
+        source: 'nethermind-data'
+        target: '/data'
+
+  lodestar:
+    deploy:
+      mode: 'global'
+      restart_policy:
+        condition: 'any'
+      placement:
+        constraints:
+          - 'node.hostname == cherry-lithuania-geth-worker'
+    image: 'chainsafe/lodestar:v1.17.0@sha256:54b2400f49f1db0efbf76bf74173d1fdea2c081090eb15ae0094a87118704066'
+    command:
+      - 'beacon'
+      - '--dataDir=/data'
+      - '--rest'
+      - '--rest.address=0.0.0.0'
+      - '--rest.namespace=*'
+      - '--execution.urls=http://geth:8551'
+      - '--network=mainnet'
+      - '--port=9000'
+      - '--metrics'
+      - '--checkpointSyncUrl=https://beaconstate-mainnet.chainsafe.io'
+      - '--jwt-secret=/run/secrets/jwt.hex'
+    environment:
+      NODE_OPTIONS: --max-old-space-size=8192
+    networks:
+      - 'internal'
+      - 'public-facing'
+    ports:
+      - target: 9000
+        published: 9000
+        protocol: 'tcp'
+        mode: 'host'
+      - target: 9000
+        published: 9000
+        protocol: 'udp'
+        mode: 'host'
+    secrets:
+      - source: 'jwt-secret.hex'
+        target: '/run/secrets/jwt.hex'
+    volumes:
+      - type: 'volume'
+        source: 'lodestar-data'
+        target: '/data'
+
+configs:
+  nethermind-NLog.config:
+    external: true
+
+secrets:
+  jwt-secret.hex:
+    external: true
+
+networks:
+  internal:
+  public-facing:
+    external: true
+  traefik:
+    external: true
+
+volumes:
+  nethermind-data:
+  lodestar-data:
