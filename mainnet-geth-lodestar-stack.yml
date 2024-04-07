@@ -10,7 +10,7 @@ services:
       labels:
         - 'traefik.enable=true'
         - 'traefik.http.routers.my-geth-rpc-router.tls=true'
-        - 'traefik.http.routers.my-geth-rpc-router.rule=Host(`geth.dark.florist`) || (Host(`rpc.dark.florist`) & Path(`/winedancemuffinborrow`))'
+        - 'traefik.http.routers.my-geth-rpc-router.rule=Host(`geth.dark.florist`) || (Host(`rpc.dark.florist`) && Path(`/winedancemuffinborrow`))'
         - 'traefik.http.routers.my-geth-rpc-router.service=my-geth-rpc-service'
         - 'traefik.http.services.my-geth-rpc-service.loadbalancer.server.port=8545'
     logging:
