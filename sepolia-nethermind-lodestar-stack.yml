@@ -76,13 +76,12 @@ services:
       - '--rest.address=0.0.0.0'
       - '--rest.namespace=*'
       - '--execution.urls=http://nethermind:8551'
-      - '--network=mainnet'
       - '--port=9000'
       - '--metrics'
-      - '--checkpointSyncUrl=https://beaconstate-mainnet.chainsafe.io'
+      - '--checkpointSyncUrl=https://beaconstate-sepolia.chainsafe.io'
       - '--jwt-secret=/run/secrets/jwt.hex'
     environment:
-      NODE_OPTIONS: --max-old-space-size=8192
+      NODE_OPTIONS: '--max-old-space-size=8192'
     networks:
       - 'internal'
       - 'public-facing'
