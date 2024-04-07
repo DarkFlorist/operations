@@ -10,7 +10,7 @@ services:
       labels:
         - 'traefik.enable=true'
         - 'traefik.http.routers.my-sepolia-rpc-router.tls=true'
-        - 'traefik.http.routers.my-sepolia-rpc-router.rule=Host(`sepolia.dark.florist`)'
+        - 'traefik.http.routers.my-sepolia-rpc-router.rule=Host(`sepolia.dark.florist`) || (Host(`rpc-sepolia.dark.florist`) && Path(`/flipcardtrustone`))'
         - 'traefik.http.routers.my-sepolia-rpc-router.service=my-sepolia-rpc-service'
         - 'traefik.http.services.my-sepolia-rpc-service.loadbalancer.server.port=8545'
     logging:
