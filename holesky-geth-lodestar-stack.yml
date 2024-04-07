@@ -26,6 +26,7 @@ services:
       - '--http.addr=0.0.0.0'
       - '--http.port=8545'
       - '--http.vhosts=*'
+      - '--http.rpcprefix=/' # serve on all paths
       - '--cache=2048'
       - '--maxpeers=40'
       - '--authrpc.addr=0.0.0.0'
