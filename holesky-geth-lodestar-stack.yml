@@ -1,0 +1,113 @@
+services:
+  geth:
+    deploy:
+      mode: 'global'
+      restart_policy:
+        condition: 'any'
+      placement:
+        constraints:
+          - 'node.hostname == cherry-lithuania-testnets'
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.my-holesky-rpc-router.tls=true'
+        - 'traefik.http.routers.my-holesky-rpc-router.rule=Host(`holesky.dark.florist`)'
+        - 'traefik.http.routers.my-holesky-rpc-router.service=my-holesky-rpc-service'
+        - 'traefik.http.services.my-holesky-rpc-service.loadbalancer.server.port=8545'
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+    image: 'sinamahmoodi/go-ethereum:multicall@sha256:50e2e1a969dbdc807296cbf20ab908883e95c523a8c91b96a9779b440968efe3'
+    command:
+      - '--holesky'
+      - '--datadir=/data'
+      - '--http'
+      - '--http.addr=0.0.0.0'
+      - '--http.port=8545'
+      - '--http.vhosts=*'
+      - '--cache=2048'
+      - '--maxpeers=40'
+      - '--authrpc.addr=0.0.0.0'
+      - '--authrpc.port=8551'
+      - '--authrpc.vhosts=*'
+      - '--authrpc.jwtsecret=/run/secrets/jwt.hex'
+      - '--state.scheme=path'
+    networks:
+      - 'traefik'
+      - 'internal'
+      - 'public-facing'
+    ports:
+      - target: 30303
+        published: 30303
+        protocol: 'tcp'
+        mode: 'host'
+      - target: 30303
+        published: 30303
+        protocol: 'udp'
+        mode: 'host'
+    secrets:
+      - source: 'jwt-secret.hex'
+        target: '/run/secrets/jwt.hex'
+    volumes:
+      - type: 'volume'
+        source: 'geth-data'
+        target: '/data'
+
+  lodestar:
+    deploy:
+      mode: 'global'
+      restart_policy:
+        condition: 'any'
+      placement:
+        constraints:
+          - 'node.hostname == cherry-lithuania-testnets'
+    image: 'chainsafe/lodestar:v1.17.0@sha256:54b2400f49f1db0efbf76bf74173d1fdea2c081090eb15ae0094a87118704066'
+    command:
+      - 'beacon'
+      - '--network=holesky'
+      - '--dataDir=/data'
+      - '--rest'
+      - '--rest.address=0.0.0.0'
+      - '--rest.namespace=*'
+      - '--execution.urls=http://geth:8551'
+      - '--port=9000'
+      - '--metrics'
+      - '--checkpointSyncUrl=https://beaconstate-holesky.chainsafe.io'
+      - '--jwt-secret=/run/secrets/jwt.hex'
+    environment:
+      NODE_OPTIONS: '--max-old-space-size=8192'
+    networks:
+      - 'internal'
+      - 'public-facing'
+    ports:
+      - target: 9000
+        published: 9000
+        protocol: 'tcp'
+        mode: 'host'
+      - target: 9000
+        published: 9000
+        protocol: 'udp'
+        mode: 'host'
+    secrets:
+      - source: 'jwt-secret.hex'
+        target: '/run/secrets/jwt.hex'
+    volumes:
+      - type: 'volume'
+        source: 'lodestar-data'
+        target: '/data'
+
+secrets:
+  jwt-secret.hex:
+    external: true
+
+networks:
+  internal:
+  public-facing:
+    external: true
+  traefik:
+    external: true
+
+volumes:
+  geth-data:
+  lodestar-data:
