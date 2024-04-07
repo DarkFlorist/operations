@@ -10,7 +10,7 @@ services:
       labels:
         - 'traefik.enable=true'
         - 'traefik.http.routers.my-nethermind-rpc-router.tls=true'
-        - 'traefik.http.routers.my-nethermind-rpc-router.rule=Host(`nethermind.dark.florist`) || (Host(`rpc.dark.florist`) & Path(`/birdchalkrenewtip`))'
+        - 'traefik.http.routers.my-nethermind-rpc-router.rule=Host(`nethermind.dark.florist`) || (Host(`rpc.dark.florist`) && Path(`/birdchalkrenewtip`))'
         - 'traefik.http.routers.my-nethermind-rpc-router.service=my-nethermind-rpc-service'
         - 'traefik.http.services.my-nethermind-rpc-service.loadbalancer.server.port=8545'
     logging:
