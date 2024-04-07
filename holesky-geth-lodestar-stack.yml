@@ -33,17 +33,19 @@ services:
       - '--authrpc.vhosts=*'
       - '--authrpc.jwtsecret=/run/secrets/jwt.hex'
       - '--state.scheme=path'
+      - '--port=30304'
+      - '--discovery.port=30304'
     networks:
       - 'traefik'
       - 'internal'
       - 'public-facing'
     ports:
-      - target: 30303
-        published: 30303
+      - target: 30304
+        published: 30304
         protocol: 'tcp'
         mode: 'host'
-      - target: 30303
-        published: 30303
+      - target: 30304
+        published: 30304
         protocol: 'udp'
         mode: 'host'
     secrets:
@@ -71,7 +73,7 @@ services:
       - '--rest.address=0.0.0.0'
       - '--rest.namespace=*'
       - '--execution.urls=http://geth:8551'
-      - '--port=9000'
+      - '--port=9001'
       - '--metrics'
       - '--checkpointSyncUrl=https://beaconstate-holesky.chainsafe.io'
       - '--jwt-secret=/run/secrets/jwt.hex'
@@ -81,12 +83,12 @@ services:
       - 'internal'
       - 'public-facing'
     ports:
-      - target: 9000
-        published: 9000
+      - target: 9001
+        published: 9001
         protocol: 'tcp'
         mode: 'host'
-      - target: 9000
-        published: 9000
+      - target: 9001
+        published: 9001
         protocol: 'udp'
         mode: 'host'
     secrets:
