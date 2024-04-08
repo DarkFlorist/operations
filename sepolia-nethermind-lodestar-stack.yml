@@ -39,7 +39,7 @@ services:
       traefik:
       internal:
         aliases:
-          - 'nethermind-abcd'
+          - 'nethermind'
       public-facing:
     ports:
       - target: 30303
@@ -85,8 +85,8 @@ services:
     environment:
       NODE_OPTIONS: '--max-old-space-size=8192'
     networks:
-      - 'internal'
-      - 'public-facing'
+      internal:
+      public-facing:
     ports:
       - target: 9000
         published: 9000
