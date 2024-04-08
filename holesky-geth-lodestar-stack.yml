@@ -37,9 +37,11 @@ services:
       - '--port=30304'
       - '--discovery.port=30304'
     networks:
-      - 'traefik'
-      - 'internal'
-      - 'public-facing'
+      traefik:
+      internal:
+        aliases:
+          - 'geth-internal'
+      public-facing:
     ports:
       - target: 30304
         published: 30304
@@ -73,7 +75,7 @@ services:
       - '--rest'
       - '--rest.address=0.0.0.0'
       - '--rest.namespace=*'
-      - '--execution.urls=http://geth:8551'
+      - '--execution.urls=http://geth-internal:8551'
       - '--port=9001'
       - '--metrics'
       - '--checkpointSyncUrl=https://beaconstate-holesky.chainsafe.io'
@@ -81,8 +83,8 @@ services:
     environment:
       NODE_OPTIONS: '--max-old-space-size=8192'
     networks:
-      - 'internal'
-      - 'public-facing'
+      internal:
+      public-facing:
     ports:
       - target: 9001
         published: 9001
