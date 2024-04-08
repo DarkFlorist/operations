@@ -36,9 +36,11 @@ services:
       NETHERMIND_SYNCCONFIG_FASTBLOCKS: 'true'
       NETHERMIND_PRUNINGCONFIG_FULLPRUNINGTRIGGER: 'StateDbSize'
     networks:
-      - 'traefik'
-      - 'internal'
-      - 'public-facing'
+      traefik:
+      internal:
+        aliases:
+          - 'nethermind-abcd'
+      public-facing:
     ports:
       - target: 30303
         published: 30303
@@ -75,7 +77,7 @@ services:
       - '--rest'
       - '--rest.address=0.0.0.0'
       - '--rest.namespace=*'
-      - '--execution.urls=http://sepolia-nethermind-lodestar_nethermind:8551'
+      - '--execution.urls=http://nethermind-abcd:8551'
       - '--port=9000'
       - '--metrics'
       - '--checkpointSyncUrl=https://beaconstate-sepolia.chainsafe.io'
