@@ -18,7 +18,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    image: 'nethermindeth/nethermind:eth_multicall@sha256:be2594b2c51cc0e14d65698879cd551ac125a4b18de30ee320621f76cb536cda'
+    # https://hub.docker.com/r/nethermindeth/nethermind/tags
+    image: 'nethermindeth/nethermind:eth_multicall@sha256:4d8b33738ca72fd23f564c615aabe0d7e9396817ade3af9a53ce75bee047a6a4'
     environment:
       NETHERMIND_CONFIG: 'mainnet'
       NETHERMIND_INITCONFIG_BASEDBPATH: '/data/db'
