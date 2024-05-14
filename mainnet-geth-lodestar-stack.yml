@@ -18,7 +18,7 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    image: 'sinamahmoodi/go-ethereum:multicall@sha256:50e2e1a969dbdc807296cbf20ab908883e95c523a8c91b96a9779b440968efe3'
+    image: 'ethpandaops/geth:multicall@sha256:58dd5f128473d224626bf68ee3e05afc5bef16794a06bd76ce9a1efadac24d45'
     command:
       - '--mainnet'
       - '--datadir=/data'
