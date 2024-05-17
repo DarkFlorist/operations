@@ -18,7 +18,7 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    image: 'nethermindeth/nethermind:eth_multicall@sha256:be2594b2c51cc0e14d65698879cd551ac125a4b18de30ee320621f76cb536cda'
+    image: 'nethermindeth/nethermind:eth_multicall@sha256:3e73b1a5bc837e303bfdb6801cd4c3d3df421bb4ff0a71883b516085357a3789'
     environment:
       NETHERMIND_CONFIG: 'sepolia'
       NETHERMIND_INITCONFIG_BASEDBPATH: '/data/db'
