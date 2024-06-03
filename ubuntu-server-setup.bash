@@ -17,6 +17,7 @@ chmod 700 /home/micah/.ssh
 
 # disable root user
 sed -i "s/^PermitRootLogin .*$/PermitRootLogin no/" /etc/ssh/sshd_config
+passwd -dl root
 
 # disable password authentication
 sed -i "s/^PasswordAuthentication .*$/PasswordAuthentication no/" /etc/ssh/sshd_config
