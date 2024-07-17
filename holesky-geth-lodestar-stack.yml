@@ -27,6 +27,7 @@ services:
       - '--http.addr=0.0.0.0'
       - '--http.port=8545'
       - '--http.vhosts=*'
+      - '--http.corsdomain=*'
       - '--http.rpcprefix=/' # serve on all paths
       - '--cache=2048'
       - '--maxpeers=40'
@@ -71,12 +72,12 @@ services:
     image: 'chainsafe/lodestar:v1.17.0@sha256:54b2400f49f1db0efbf76bf74173d1fdea2c081090eb15ae0094a87118704066'
     command:
       - 'beacon'
-      - '--network=holesky'
       - '--dataDir=/data'
       - '--rest'
       - '--rest.address=0.0.0.0'
       - '--rest.namespace=*'
       - '--execution.urls=http://geth-internal:8551'
+      - '--network=holesky'
       - '--port=9001'
       - '--metrics'
       - '--checkpointSyncUrl=https://beaconstate-holesky.chainsafe.io'
