@@ -19,7 +19,7 @@ services:
         max-size: '10m'
         max-file: '3'
     # https://hub.docker.com/r/nethermindeth/nethermind/tags
-    image: 'nethermindeth/nethermind:eth_simulate@sha256:a5dbe6da7d55b170d9d73bed80a99c1fca97895e0a9c2bf79c7b55ab9935b704'
+    image: 'nethermindeth/nethermind:eth_simulate@sha256:7b2d90070b46f54604721fa53eb502ee9f93815e071e02ef018c638b8b91c08d'
     environment:
       NETHERMIND_CONFIG: 'mainnet'
       NETHERMIND_INITCONFIG_BASEDBPATH: '/data/db'
