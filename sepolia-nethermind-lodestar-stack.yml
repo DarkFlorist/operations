@@ -18,8 +18,10 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    # https://hub.docker.com/layers/nethermindeth/nethermind/eth_simulate/images/sha256-c40655333c86118e1f657188b788e81151bde2c28e1d718efdbc05d21e023524?context=explore
-    image: 'nethermindeth/nethermind:eth_simulate@sha256:7b2d90070b46f54604721fa53eb502ee9f93815e071e02ef018c638b8b91c08d'
+    # https://hub.docker.com/layers/nethermind/nethermind/1.28.0-chiseled/images/sha256-fdb1c67ad0bcce2a7c927c4e68f84a4a652b9fabe9a65595c114ea1c3ed3558a?context=explore
+    image: 'nethermind/nethermind:1.28.0-chiseled@sha256:8eaa6f6a8e0f47b46dc1594244c3658d2e982cf13dbf2f0b09798e2f62998a2a'
+    # https://hub.docker.com/layers/nethermindeth/nethermind/eth_simulate/images/sha256:0273691940f45dfbc02bf91c846411ef564825ae8dec63ce2363f6c8b9a5115f?context=explore
+    # image: 'nethermindeth/nethermind:eth_simulate@sha256:0273691940f45dfbc02bf91c846411ef564825ae8dec63ce2363f6c8b9a5115f'
     environment:
       NETHERMIND_CONFIG: 'sepolia'
       NETHERMIND_INITCONFIG_BASEDBPATH: '/data/db'
