@@ -18,8 +18,10 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    # https://hub.docker.com/layers/nethermindeth/nethermind/eth_simulate/images/sha256-c40655333c86118e1f657188b788e81151bde2c28e1d718efdbc05d21e023524?context=explore
-    image: 'nethermindeth/nethermind:eth_simulate@sha256:7b2d90070b46f54604721fa53eb502ee9f93815e071e02ef018c638b8b91c08d'
+    # https://hub.docker.com/layers/nethermind/nethermind/1.28.0-chiseled/images/sha256:fdb1c67ad0bcce2a7c927c4e68f84a4a652b9fabe9a65595c114ea1c3ed3558a?context=explore
+    image: 'nethermind/nethermind:1.28.0-chiseled@sha256:fdb1c67ad0bcce2a7c927c4e68f84a4a652b9fabe9a65595c114ea1c3ed3558a'
+    # https://hub.docker.com/layers/nethermindeth/nethermind/eth_simulate/images/sha256-cd46e864917cfd605d77b9f2fdc640beb3e5913fd2330415c88d9e7c9998ef61?context=explore
+    # image: 'nethermindeth/nethermind:eth_simulate@sha256:cd46e864917cfd605d77b9f2fdc640beb3e5913fd2330415c88d9e7c9998ef61'
     environment:
       NETHERMIND_CONFIG: 'sepolia'
       NETHERMIND_INITCONFIG_BASEDBPATH: '/data/db'
@@ -70,7 +72,8 @@ services:
       placement:
         constraints:
           - 'node.hostname == cherry-lithuania-testnets'
-    image: 'chainsafe/lodestar:v1.17.0@sha256:54b2400f49f1db0efbf76bf74173d1fdea2c081090eb15ae0094a87118704066'
+    # https://hub.docker.com/layers/chainsafe/lodestar/v1.22.0/images/sha256-018901f4889eab4a2085a751cdaddb2a1fd4a4229818e59a096b4c1966370fed?context=explore
+    image: 'chainsafe/lodestar:v1.22.0@sha256:018901f4889eab4a2085a751cdaddb2a1fd4a4229818e59a096b4c1966370fed'
     command:
       - 'beacon'
       - '--network=sepolia'
