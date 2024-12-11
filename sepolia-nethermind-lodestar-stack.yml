@@ -18,8 +18,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    # https://hub.docker.com/layers/nethermind/nethermind/1.28.0-chiseled/images/sha256:fdb1c67ad0bcce2a7c927c4e68f84a4a652b9fabe9a65595c114ea1c3ed3558a?context=explore
-    image: 'nethermind/nethermind:1.28.0-chiseled@sha256:fdb1c67ad0bcce2a7c927c4e68f84a4a652b9fabe9a65595c114ea1c3ed3558a'
+    # https://hub.docker.com/layers/nethermind/nethermind/1.29.1-chiseled/images/sha256-a7bbe3c504f2dae0dff008bc0ef522752adeedecd55d934b7b34a0b746eb3fa7?context=explore
+    image: 'nethermind/nethermind:1.29.1-chiseled@sha256:b38c73d6466d6ff728f780a03d30e4b5395bf84defa05991e1983068b9e80b43'
     # https://hub.docker.com/layers/nethermindeth/nethermind/eth_simulate/images/sha256-cd46e864917cfd605d77b9f2fdc640beb3e5913fd2330415c88d9e7c9998ef61?context=explore
     # image: 'nethermindeth/nethermind:eth_simulate@sha256:cd46e864917cfd605d77b9f2fdc640beb3e5913fd2330415c88d9e7c9998ef61'
     environment:
