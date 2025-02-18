@@ -18,8 +18,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    # https://hub.docker.com/layers/ethpandaops/geth/multicall/images/sha256-6bbb13aac646392c7650341aa95c00345f12fbabd80bd304d5ff4aaed6dec043?context=explore amd64
-    image: 'ethpandaops/geth:multicall@sha256:0918974bf76ebaa84b87ad7d340e909e31a39aba894be142e9db91d62e910c91'
+    # https://hub.docker.com/layers/ethpandaops/geth/master/images/sha256-bfbbfb83f2b1eeff02020d7ad2df0ca199c02dd62e96543b0174e26a0aa4ccfc amd64
+    image: 'ethpandaops/geth:multicall@sha256:bfbbfb83f2b1eeff02020d7ad2df0ca199c02dd62e96543b0174e26a0aa4ccfc'
     command:
       - '--holesky'
       - '--datadir=/data'

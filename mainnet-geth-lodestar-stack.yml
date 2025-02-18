@@ -18,7 +18,7 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    image: 'ethpandaops/geth:multicall@sha256:0918974bf76ebaa84b87ad7d340e909e31a39aba894be142e9db91d62e910c91'
+    image: 'ethpandaops/geth:multicall@sha256:bfbbfb83f2b1eeff02020d7ad2df0ca199c02dd62e96543b0174e26a0aa4ccfc'
     command:
       - '--mainnet'
       - '--datadir=/data'
