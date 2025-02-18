@@ -18,8 +18,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    # https://hub.docker.com/layers/ethpandaops/geth/master/images/sha256-bfbbfb83f2b1eeff02020d7ad2df0ca199c02dd62e96543b0174e26a0aa4ccfc amd64
-    image: 'ethpandaops/geth:multicall@sha256:bfbbfb83f2b1eeff02020d7ad2df0ca199c02dd62e96543b0174e26a0aa4ccfc'
+    # https://hub.docker.com/layers/ethereum/client-go/release-1.15/images/sha256-d4ed1edc0947f90e4e489deb06517b84e54b41e39a4564ee42dad06fa042ee37 amd64
+    image: 'ethpandaops/geth:multicall@sha256:d4ed1edc0947f90e4e489deb06517b84e54b41e39a4564ee42dad06fa042ee37'
     command:
       - '--holesky'
       - '--datadir=/data'
