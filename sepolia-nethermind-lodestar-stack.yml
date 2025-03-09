@@ -127,6 +127,6 @@ networks:
 
 volumes:
   nethermind-data:
-  netehrmind-log:
+  netehrmind-logs:
   nethermind-keystore:
   lodestar-data:
