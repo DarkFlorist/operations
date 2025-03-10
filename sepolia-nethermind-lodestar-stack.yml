@@ -74,8 +74,8 @@ services:
       placement:
         constraints:
           - 'node.hostname == cherry-lithuania-testnets'
-    # https://hub.docker.com/layers/chainsafe/lodestar/v1.22.0/images/sha256-018901f4889eab4a2085a751cdaddb2a1fd4a4229818e59a096b4c1966370fed?context=explore
-    image: 'chainsafe/lodestar:v1.22.0@sha256:018901f4889eab4a2085a751cdaddb2a1fd4a4229818e59a096b4c1966370fed'
+    # https://hub.docker.com/r/chainsafe/lodestar/tags
+    image: 'chainsafe/lodestar:v1.27.1@sha256:4c9e5fc16ee9e29fdffefc91963bc94501a639bc0ca572a31e717e68a2d2c01d'
     command:
       - 'beacon'
       - '--network=sepolia'
