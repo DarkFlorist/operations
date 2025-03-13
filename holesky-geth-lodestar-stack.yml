@@ -81,7 +81,8 @@ services:
       - '--network=holesky'
       - '--port=9001'
       - '--metrics'
-      - '--checkpointSyncUrl=https://beaconstate-holesky.chainsafe.io'
+      - '--checkpointSyncUrl=https://holesky.beaconstate.info/' # temporary workaround for chainsafe checkpoint sync server being down
+      # - '--checkpointSyncUrl=https://beaconstate-holesky.chainsafe.io'
       - '--jwt-secret=/run/secrets/jwt.hex'
     environment:
       NODE_OPTIONS: '--max-old-space-size=8192'
