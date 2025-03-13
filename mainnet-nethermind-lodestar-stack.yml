@@ -22,8 +22,6 @@ services:
     image: 'nethermind/nethermind:1.31.4-chiseled@sha256:2822ce09240bed0c277df588c47826e6d531ad88e109e99797f54db0243f63a5'
     environment:
       NETHERMIND_CONFIG: 'mainnet'
-      NETHERMIND_INITCONFIG_BASEDBPATH: '/data/db'
-      NETHERMIND_KEYSTORECONFIG_KEYSTOREDIRECTORY: '/data/keystore'
       NETHERMIND_HEALTHCHECKSCONFIG_ENABLED: 'true'
       NETHERMIND_HEALTHCHECKSCONFIG_UIENABLED: 'true'
       NETHERMIND_INITCONFIG_MEMORYHINT: '24000000000'
@@ -60,7 +58,13 @@ services:
     volumes:
       - type: 'volume'
         source: 'nethermind-data'
-        target: '/data'
+        target: '/nethermind/nethermind_db'
+      - type: 'volume'
+        source: 'nethermind-keystore'
+        target: '/nethermind/keystore'
+      - type: 'volume'
+        source: 'nethermind-logs'
+        target: '/nethermind/logs'
 
   lodestar:
     deploy:
@@ -123,4 +127,6 @@ networks:
 
 volumes:
   nethermind-data:
+  nethermind-logs:
+  nethermind-keystore:
   lodestar-data:
