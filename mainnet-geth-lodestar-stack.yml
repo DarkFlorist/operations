@@ -67,7 +67,7 @@ services:
         constraints:
           - 'node.hostname == cherry-lithuania-geth-worker'
     # https://hub.docker.com/r/chainsafe/lodestar/tags
-    image: 'chainsafe/lodestar:v1.27.1@sha256:4c9e5fc16ee9e29fdffefc91963bc94501a639bc0ca572a31e717e68a2d2c01d'
+    image: 'chainsafe/lodestar:v1.29.0@sha256:71fab3791140b1282a370da6387b511f19804c03aa1ccfafb09007ac0be95208'
     command:
       - 'beacon'
       - '--dataDir=/data'
