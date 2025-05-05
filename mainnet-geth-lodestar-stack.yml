@@ -18,7 +18,7 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    image: 'ethereum/client-go:v1.15.5@sha256:fb9553bdae51e82d55e574b4935d0101b640097174ad93457ea7d81abb6b5e68'
+    image: 'ethereum/client-go:v1.15.10@sha256:1e96a444c60864631d1b354367c696cc9b458695d2455ebb5f9a0c10e834ade8'
     command:
       - '--mainnet'
       - '--datadir=/data'
