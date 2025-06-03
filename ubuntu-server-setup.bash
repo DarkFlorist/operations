@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# create micah user
+# create micah user; note: if you can't login it may be because ubuntu decided to lock the user account for some reason, change ! to * in /etc/shadow for the user
 adduser --disabled-password --shell /bin/bash --home /home/micah --gecos '' micah
 usermod -aG sudo micah
 
@@ -40,6 +40,8 @@ apt-get update
 
 # install docker v25.0.5-1 via apt package manager
 apt-get install --yes docker-ce=5:25.0.5-1~ubuntu.22.04~jammy docker-ce-cli=5:25.0.5-1~ubuntu.22.04~jammy containerd.io docker-buildx-plugin docker-compose-plugin
+# for ubuntu 24.04, no idea what the `5:` is at the start of the versions...
+# apt-get install --yes docker-ce=5:28.2.2-1~ubuntu.24.04~noble docker-ce-cli=5:28.2.2-1~ubuntu.24.04~noble containerd.io=1.7.27-1 docker-buildx-plugin=0.24.0-1~ubuntu.24.04~noble docker-compose-plugin=2.36.2-1~ubuntu.24.04~noble
 
 # Move docker data location to another drive with
 # mkdir /docker-data-drive
