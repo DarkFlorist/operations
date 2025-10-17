@@ -35,6 +35,7 @@ services:
       - '--authrpc.vhosts=*'
       - '--authrpc.jwtsecret=/run/secrets/jwt.hex'
       - '--state.scheme=path'
+      - '--history.chain=postmerge'
     networks:
       traefik:
       internal:
