@@ -18,7 +18,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    image: 'ethereum/client-go:v1.15.10@sha256:1e96a444c60864631d1b354367c696cc9b458695d2455ebb5f9a0c10e834ade8'
+    # https://hub.docker.com/layers/ethereum/client-go/v1.16.7/images/sha256-9dc2db05933ea9b359b4c07960931ef75f42f8f411018c825eb95d882e82fdc1 amd64
+    image: 'ethereum/client-go:v1.16.7@sha256:9dc2db05933ea9b359b4c07960931ef75f42f8f411018c825eb95d882e82fdc1'
     command:
       - '--mainnet'
       - '--datadir=/data'
