@@ -18,8 +18,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    # https://hub.docker.com/layers/ethereum/client-go/release-1.15/images/sha256-fb9553bdae51e82d55e574b4935d0101b640097174ad93457ea7d81abb6b5e68 amd64
-    image: 'ethereum/client-go:v1.15.5@sha256:fb9553bdae51e82d55e574b4935d0101b640097174ad93457ea7d81abb6b5e68'
+    # https://hub.docker.com/layers/ethereum/client-go/v1.16.7/images/sha256-9dc2db05933ea9b359b4c07960931ef75f42f8f411018c825eb95d882e82fdc1 amd64
+    image: 'ethereum/client-go:v1.16.7@sha256:9dc2db05933ea9b359b4c07960931ef75f42f8f411018c825eb95d882e82fdc1'
     command:
       - '--holesky'
       - '--datadir=/data'
