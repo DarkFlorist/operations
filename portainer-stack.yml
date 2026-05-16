@@ -35,7 +35,7 @@ services:
         max-size: '10m'
         max-file: '3'
     image: 'portainer/portainer-ce:2.41.1@sha256:0a110a56be09374e69f73748216b1c47e76284d8a7baa5363e8804e2a6bb4aff'
-    command: '-H tcp://tasks.agent:9001 --tlsskipverify'
+    command: '-H tcp://tasks.agent:9001 --tlsskipverify --http-enabled'
     # uncomment these initially so you can connect to localhost:9000 via SSH tunnel, and then comment them back out once traefik is up and running
     # this lets us use Portainer to deploy Traefik, but then use Traefik to access portainer with proper end to end TLS termination once things are up
     #ports:
