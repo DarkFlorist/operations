@@ -23,7 +23,6 @@ services:
     # https://hub.docker.com/_/traefik/tags
     image: 'traefik:v3.7.1@sha256:6b9cbca6fac42ab0075f5437d8dc1685cfd188626d8d515839ea94f8b6271c42'
     command:
-        - '--providers.docker=true'
         - '--providers.file.filename=/traefik-config.yml' # CLI or environment configuration is preferred, but traefik only lets you set the TLS certificate paths via file configurtion
         - '--providers.swarm.endpoint=unix:///var/run/docker.sock'
         - '--providers.swarm.watch=true'
@@ -31,10 +30,6 @@ services:
         - '--providers.swarm.network=traefik'
         - '--entryPoints.websecure.address=:443'
         - '--entrypoints.websecure.http.tls=true'
-        - '--entrypoints.web.address=:80'
-        - '--entrypoints.web.http.redirections.entrypoint.to=websecure'
-        - '--entrypoints.web.http.redirections.entrypoint.scheme=https'
-        - '--entrypoints.web.http.redirections.entrypoint.permanent=true'
         - '--api.dashboard=true'
         - '--api.insecure=false'
     networks:
