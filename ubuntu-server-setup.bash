@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# create micah user; note: if you can't login it may be because ubuntu decided to lock the user account for some reason, change ! to * in /etc/shadow for the user
 adduser --disabled-password --shell /bin/bash --home /home/micah --gecos '' micah
+# modern SSH server treats disabled password as disabled account.  Setting the password instead to an invalid hash like `*` will make password login functionally impossible, without disabling the account.  This is how Ubuntu configures most default accounts.
+usermod -p '*' micah
 usermod -aG sudo micah
 
 # allow sudo without password
@@ -39,9 +40,8 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 apt-get update
 
 # install docker v25.0.5-1 via apt package manager
-apt-get install --yes docker-ce=5:25.0.5-1~ubuntu.22.04~jammy docker-ce-cli=5:25.0.5-1~ubuntu.22.04~jammy containerd.io docker-buildx-plugin docker-compose-plugin
-# for ubuntu 24.04, no idea what the `5:` is at the start of the versions...
-# apt-get install --yes docker-ce=5:28.2.2-1~ubuntu.24.04~noble docker-ce-cli=5:28.2.2-1~ubuntu.24.04~noble containerd.io=1.7.27-1 docker-buildx-plugin=0.24.0-1~ubuntu.24.04~noble docker-compose-plugin=2.36.2-1~ubuntu.24.04~noble
+# apt-get install --yes docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt-get install --yes docker-ce=5:29.5.0-1~ubuntu.24.04~noble docker-ce-cli=5:29.5.0-1~ubuntu.24.04~noble docker-ce-rootless-extras=5:29.5.0-1~ubuntu.24.04~noble containerd.io=2.2.3-1~ubuntu.24.04~noble docker-buildx-plugin=0.34.0-1~ubuntu.24.04~noble docker-compose-plugin=5.1.3-1~ubuntu.24.04~noble pigz=2.8-1 
 
 # Move docker data location to another drive with
 # mkdir /docker-data-drive
