@@ -62,12 +62,12 @@ networks:
   # note: published ports bypass any internal network restrictions
   # internal private network with services that traefik should route to
   traefik:
+    driver: 'overlay'
     external: true
 
 configs:
   # keeping config in docker-compose file is preferable, but Traefik stupidly doesn't let you set certificate path via CLI config, so we have to put it in a file config
   traefik-config.yml:
-    driver: overlay
     external: true
 
 secrets:
