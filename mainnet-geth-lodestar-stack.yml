@@ -4,9 +4,6 @@ services:
       mode: 'global'
       restart_policy:
         condition: 'any'
-      placement:
-        constraints:
-          - 'node.hostname == cherry-lithuania-geth-worker'
       labels:
         - 'traefik.enable=true'
         - 'traefik.http.routers.my-geth-rpc-router.tls=true'
@@ -18,8 +15,8 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
-    # https://hub.docker.com/layers/ethereum/client-go/v1.16.7/images/sha256-9dc2db05933ea9b359b4c07960931ef75f42f8f411018c825eb95d882e82fdc1 amd64
-    image: 'ethereum/client-go:v1.16.7@sha256:9dc2db05933ea9b359b4c07960931ef75f42f8f411018c825eb95d882e82fdc1'
+    # https://hub.docker.com/layers/ethereum/client-go/tags
+    image: 'ethereum/client-go:v1.17.3@sha256:ee8af3a081fd8f780509541cf8115be03259e106375e50efa9d995400f86e15d'
     command:
       - '--mainnet'
       - '--datadir=/data'
@@ -68,8 +65,13 @@ services:
       placement:
         constraints:
           - 'node.hostname == cherry-lithuania-geth-worker'
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
     # https://hub.docker.com/r/chainsafe/lodestar/tags
-    image: 'chainsafe/lodestar:v1.37.0@sha256:2e9a63b01e3791c82bcc939745e06f1bdc0a822cfd1fd1384cedd8c2a727c197'
+    image: 'chainsafe/lodestar:v1.42.0@sha256:def9595dc1aab0024cb3361ff234e6a9f0bbb154f575cf5df5804f5b033ed8d3'
     command:
       - 'beacon'
       - '--dataDir=/data'
