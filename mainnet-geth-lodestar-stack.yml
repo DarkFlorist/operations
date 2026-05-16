@@ -82,6 +82,7 @@ services:
       - '--metrics'
       - '--checkpointSyncUrl=https://beaconstate-mainnet.chainsafe.io'
       - '--jwt-secret=/run/secrets/jwt.hex'
+      - '--chain.pruneHistory'
     environment:
       NODE_OPTIONS: --max-old-space-size=8192
     networks:
