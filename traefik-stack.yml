@@ -27,7 +27,7 @@ services:
         - '--providers.file.filename=/traefik-config.yml' # CLI or environment configuration is preferred, but traefik only lets you set the TLS certificate paths via file configurtion
         - '--providers.swarm.endpoint=unix:///var/run/docker.sock'
         - '--providers.swarm.watch=true'
-        - '--providers.swarm.exposedbydefault=false'
+        - '--providers.swarm.exposedByDefault=false'
         - '--providers.swarm.network=traefik'
         - '--entryPoints.websecure.address=:443'
         - '--entrypoints.websecure.http.tls=true'
