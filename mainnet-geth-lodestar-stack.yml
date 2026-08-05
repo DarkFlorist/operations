@@ -17,7 +17,7 @@ services:
         max-size: '10m'
         max-file: '3'
     # https://hub.docker.com/layers/ethereum/client-go/tags
-    image: 'ethereum/client-go:v1.17.3@sha256:ee8af3a081fd8f780509541cf8115be03259e106375e50efa9d995400f86e15d'
+    image: 'ethereum/client-go:v1.17.5@sha256:11d2973d3edda84dabdfff3ba434a1f3f3d0993274cbafabeca7ecfaaaf59906'
     command:
       - '--mainnet'
       - '--datadir=/data'
@@ -69,7 +69,7 @@ services:
         max-size: '10m'
         max-file: '3'
     # https://hub.docker.com/r/chainsafe/lodestar/tags
-    image: 'chainsafe/lodestar:v1.42.0@sha256:def9595dc1aab0024cb3361ff234e6a9f0bbb154f575cf5df5804f5b033ed8d3'
+    image: 'chainsafe/lodestar:v1.45.0-amd64@sha256:826479a937aadbb9675f21ef3be60ed761c9fcbaba2d5c6a8334c876f67d6d36'
     command:
       - 'beacon'
       - '--dataDir=/data'
